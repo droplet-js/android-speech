@@ -26,6 +26,9 @@ steps:
     VERSION_NAME: 1.0.0-SNAPSHOT
   commands:
   - ./gradlew :speech-msc-android:clean :speech-msc-android:install :speech-msc-android:artifactoryPublish
+  when:
+    event:
+    - push
 
 - name: release
   image: runmymind/docker-android-sdk
