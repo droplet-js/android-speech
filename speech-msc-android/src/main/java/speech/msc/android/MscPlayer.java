@@ -6,12 +6,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Looper;
-import androidx.annotation.IntDef;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
 
 public abstract class MscPlayer {
     public static final int PLAY_STATE_QUIT = 0;
@@ -63,7 +64,7 @@ public abstract class MscPlayer {
         }
     }
 
-    protected final void postDelayed(Runnable action, long delayMillis) {
+    protected final void postDelayed(long delayMillis, Runnable action) {
         if (mainHandler != null) {
             mainHandler.postDelayed(action, delayMillis);
         }
@@ -138,7 +139,7 @@ public abstract class MscPlayer {
         }
     }
 
-    private final class CallReceiver extends BroadcastReceiver {
+    class CallReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -182,14 +183,14 @@ public abstract class MscPlayer {
     }
 
     public interface OnPlayerListener {
-        public void onPlayProgress(int percent, int beginPos, int endPos);
-        public void onPlayEnd(Throwable error);
+        void onPlayProgress(int percent, int beginPos, int endPos);
+        void onPlayEnd(Throwable error);
 
         // 播放状态
-        public void onPlayStateChanged(@PlayState int playState);
+        void onPlayStateChanged(@PlayState int playState);
         // 重试
-        public void onPlayRetry(MscPlayer player, boolean retryAuto, Throwable error);
+        void onPlayRetry(MscPlayer player, boolean retryAuto, Throwable error);
         // 模式切换
-        public void onPlayTransferred(MscPlayer player, Throwable error);
+        void onPlayTransferred(MscPlayer player, Throwable error);
     }
 }

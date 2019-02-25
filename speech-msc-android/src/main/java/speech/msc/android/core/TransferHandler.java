@@ -7,5 +7,5 @@ import android.content.Context;
  */
 public interface TransferHandler<E extends Throwable> {
 
-    public boolean transferred(Context context, E error);
+    boolean transferred(Context context, E error);
 }

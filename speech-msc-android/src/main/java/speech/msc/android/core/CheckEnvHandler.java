@@ -7,5 +7,5 @@ import android.content.Context;
  */
 public interface CheckEnvHandler<E extends Throwable> {
 
-    public boolean checked(Context context, E error);
+    boolean checked(Context context, E error);
 }

@@ -36,7 +36,7 @@ import speech.msc.android.iflytek.core.IFlyTekTransferHandler;
 
 public final class IFlyTekMscPlayer extends MscPlayer {
 
-    private static String TAG = "IFlyTekMscPlayer";
+    private static final String TAG = "IFlyTekMscPlayer";
 
     public static final String TYPE_CLOUD = SpeechConstant.TYPE_CLOUD;
     public static final String TYPE_LOCAL = SpeechConstant.TYPE_LOCAL;
@@ -46,15 +46,15 @@ public final class IFlyTekMscPlayer extends MscPlayer {
     public @interface EngineType {
     }
 
-    private static final RetryHandler<SpeechError> INNER_RETRY_HANDLER = new IFlyTekInnerRetryHandler(1);
-    private static final CheckEnvHandler<SpeechError> NO_NETWORK_CHECK_ENV_HANDLER = new IFlyTekNoNetworkCheckEnvHandler();
-    private static final RetryHandler<SpeechError> NETWORK_RETRY_HANDLER = new IFlyTekNetworkRetryHandler(2);
-    private static final TransferHandler<SpeechError> TRANSFER_HANDLER = new IFlyTekTransferHandler();
+    static final RetryHandler<SpeechError> INNER_RETRY_HANDLER = new IFlyTekInnerRetryHandler(1);
+    static final CheckEnvHandler<SpeechError> NO_NETWORK_CHECK_ENV_HANDLER = new IFlyTekNoNetworkCheckEnvHandler();
+    static final RetryHandler<SpeechError> NETWORK_RETRY_HANDLER = new IFlyTekNetworkRetryHandler(2);
+    static final TransferHandler<SpeechError> TRANSFER_HANDLER = new IFlyTekTransferHandler();
 
-    private final String appId;
-    private final String engineType;
+    final String appId;
+    final String engineType;
 
-    private SpeechSynthesizer speechSynthesizer;
+    SpeechSynthesizer speechSynthesizer;
 
     public IFlyTekMscPlayer(Context context, MscSettings settings, @NonNull String appId, @NonNull @EngineType String engineType) {
         super(context, settings);
@@ -74,7 +74,7 @@ public final class IFlyTekMscPlayer extends MscPlayer {
      * 适配小米手机默认禁用语记后台联网功能
      * 与讯飞语音开放平台研发沟通，强制使用 SDK 在线语音合成，不走语记在线语音合成
      */
-    private void createSpeechUtilityForNoNetwork() {
+    void createSpeechUtilityForNoNetwork() {
         if (SpeechUtility.getUtility() != null) {
             SpeechUtility.getUtility().destroy();
         }
@@ -105,7 +105,7 @@ public final class IFlyTekMscPlayer extends MscPlayer {
 
         private String text;
 
-        public IFlyTekInitListener(String text) {
+        IFlyTekInitListener(String text) {
             super();
             this.text = text;
         }
@@ -117,12 +117,12 @@ public final class IFlyTekMscPlayer extends MscPlayer {
                 beginPlayReact(text);
             } else {
                 Log.e(TAG, "init speak error: " + code);
-                postDelayed(new InitFailAction(), 300);
+                postDelayed(300, new InitFailAction());
             }
         }
     }
 
-    private void beginPlayReact(String text) {
+    void beginPlayReact(String text) {
         if (speechSynthesizer != null) {
             /** 清空参数 **/
             speechSynthesizer.setParameter(SpeechConstant.PARAMS, null);
@@ -140,15 +140,15 @@ public final class IFlyTekMscPlayer extends MscPlayer {
             /** 设置音量，范围 0 - 100 **/
             speechSynthesizer.setParameter(SpeechConstant.VOLUME, String.valueOf(80));
             /** 设置播放器音频流类型 **/
-//			speechSynthesizer.setParameter(SpeechConstant.STREAM_TYPE, "3");
+//            speechSynthesizer.setParameter(SpeechConstant.STREAM_TYPE, "3");
             /** 设置播放合成音频打断音乐播放，默认为true **/
             speechSynthesizer.setParameter(SpeechConstant.KEY_REQUEST_FOCUS, "true");
             /**
              * 设置音频保存路径，保存音频格式支持pcm、wav，设置路径为sd卡请注意WRITE_EXTERNAL_STORAGE权限
              * 注：AUDIO_FORMAT参数语记需要更新版本才能生效
              */
-//			speechSynthesizer.setParameter(SpeechConstant.AUDIO_FORMAT, "wav");
-//			speechSynthesizer.setParameter(SpeechConstant.TTS_AUDIO_PATH, "./sdcard/iflytek.wav");
+//            speechSynthesizer.setParameter(SpeechConstant.AUDIO_FORMAT, "wav");
+//            speechSynthesizer.setParameter(SpeechConstant.TTS_AUDIO_PATH, "./sdcard/iflytek.wav");
             try {
                 int code = speechSynthesizer.startSpeaking(text, synthesizerListener);
                 if (code != ErrorCode.SUCCESS) {
@@ -214,22 +214,22 @@ public final class IFlyTekMscPlayer extends MscPlayer {
                 onPlayEnd(null);
             } else {
                 final SpeechException transformError = new SpeechException("code: " + error.getErrorCode() + ", description: " + error.getErrorDescription());
-                if (TextUtils.equals(engineType, SpeechConstant.TYPE_CLOUD)) {
+                if (TextUtils.equals(engineType, TYPE_CLOUD)) {
                     if (INNER_RETRY_HANDLER.retry(context, error, innerStat.getAndIncrement())) {
-                        postDelayed(new Runnable() {
+                        postDelayed(300, new Runnable() {
                             @Override
                             public void run() {
                                 onPlayRetry(true, transformError);
                             }
-                        }, 300);
+                        });
                     } else if (NO_NETWORK_CHECK_ENV_HANDLER.checked(context, error)) {
-                        postDelayed(new Runnable() {
+                        postDelayed(300, new Runnable() {
                             @Override
                             public void run() {
                                 createSpeechUtilityForNoNetwork();
                                 onPlayRetry(true, transformError);
                             }
-                        }, 300);
+                        });
                     } else if (NETWORK_RETRY_HANDLER.retry(context, error, networkStat.getAndIncrement())) {
                         onPlayRetry(false, transformError);
                     } else {
@@ -253,10 +253,10 @@ public final class IFlyTekMscPlayer extends MscPlayer {
         public void onEvent(int eventType, int arg1, int arg2, Bundle obj) {
             // 以下代码用于获取与云端的会话id，当业务出错时将会话id提供给技术支持人员，可用于查询会话日志，定位出错原因
             // 若使用本地能力，会话id为null
-//			if (SpeechEvent.EVENT_SESSION_ID == eventType) {
-//				String sid = obj.getString(SpeechEvent.KEY_EVENT_SESSION_ID);
-//				Log.d(TAG, "session id =" + sid);
-//			}
+//            if (SpeechEvent.EVENT_SESSION_ID == eventType) {
+//                String sid = obj.getString(SpeechEvent.KEY_EVENT_SESSION_ID);
+//                Log.d(TAG, "session id =" + sid);
+//            }
         }
     };
 

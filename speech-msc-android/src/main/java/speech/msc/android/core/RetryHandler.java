@@ -7,5 +7,5 @@ import android.content.Context;
  */
 public interface RetryHandler<E extends Throwable> {
 
-    public boolean retry(Context context, E error, int executionCount);
+    boolean retry(Context context, E error, int executionCount);
 }

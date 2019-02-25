@@ -45,27 +45,28 @@ public final class IFlyTekMscHelper {
     }
 
     // 默认内置音色
-    public static final MscSpeaker DEFAULT_SPEAKER =  new MscSpeaker("晓燕", "xiaoyan", MscSpeaker.SEX_WOMAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN);// 晓燕
+    public static final MscSpeaker DEFAULT_SPEAKER = new MscSpeaker("晓燕", "xiaoyan", MscSpeaker.SEX_WOMAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN); // 晓燕
 
     private static final List<MscSpeaker> DEFAULT_MSC_SPEAKERS = new ArrayList<MscSpeaker>();
+
     static {
-        DEFAULT_MSC_SPEAKERS.add(DEFAULT_SPEAKER);// 晓燕
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小宇", "xiaoyu", MscSpeaker.SEX_MAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN));// 小宇
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小研", "vixy", MscSpeaker.SEX_WOMAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN));// 小研
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小琪", "xiaoqi", MscSpeaker.SEX_WOMAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN));// 小琪
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小峰", "vixf", MscSpeaker.SEX_MAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN));// 小峰
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小梅", "xiaomei", MscSpeaker.SEX_WOMAN, ACCENT_CANTONESE, MscSpeaker.LANGUAGE_ZH_CN));// 小梅
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小莉", "vixl", MscSpeaker.SEX_WOMAN, ACCENT_TAIWAN, MscSpeaker.LANGUAGE_ZH_CN));// 小莉
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("晓琳", "xiaolin", MscSpeaker.SEX_WOMAN, ACCENT_TAIWAN, MscSpeaker.LANGUAGE_ZH_CN));// 晓琳
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小蓉", "xiaorong", MscSpeaker.SEX_WOMAN, ACCENT_SICHUAN, MscSpeaker.LANGUAGE_ZH_CN));// 小蓉
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小芸", "vixyun", MscSpeaker.SEX_WOMAN, ACCENT_DONGBEI, MscSpeaker.LANGUAGE_ZH_CN));// 小芸
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小倩", "xiaoqian", MscSpeaker.SEX_WOMAN, ACCENT_DONGBEI, MscSpeaker.LANGUAGE_ZH_CN));// 小倩
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小坤", "xiaokun", MscSpeaker.SEX_MAN, ACCENT_HENAN, MscSpeaker.LANGUAGE_ZH_CN));// 小坤
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小强", "xiaoqiang", MscSpeaker.SEX_MAN, ACCENT_HUNAN, MscSpeaker.LANGUAGE_ZH_CN));// 小强
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小莹", "vixying", MscSpeaker.SEX_WOMAN, ACCENT_SHANXI, MscSpeaker.LANGUAGE_ZH_CN));// 小莹
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小新", "xiaoxin", MscSpeaker.SEX_MAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN));// 小新
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("楠楠", "nannan", MscSpeaker.SEX_WOMAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN));// 楠楠
-        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("老孙", "vils", MscSpeaker.SEX_MAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN));// 老孙
+        DEFAULT_MSC_SPEAKERS.add(DEFAULT_SPEAKER); // 晓燕
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小宇", "xiaoyu", MscSpeaker.SEX_MAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN)); // 小宇
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小研", "vixy", MscSpeaker.SEX_WOMAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN)); // 小研
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小琪", "xiaoqi", MscSpeaker.SEX_WOMAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN)); // 小琪
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小峰", "vixf", MscSpeaker.SEX_MAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN)); // 小峰
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小梅", "xiaomei", MscSpeaker.SEX_WOMAN, ACCENT_CANTONESE, MscSpeaker.LANGUAGE_ZH_CN)); // 小梅
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小莉", "vixl", MscSpeaker.SEX_WOMAN, ACCENT_TAIWAN, MscSpeaker.LANGUAGE_ZH_CN)); // 小莉
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("晓琳", "xiaolin", MscSpeaker.SEX_WOMAN, ACCENT_TAIWAN, MscSpeaker.LANGUAGE_ZH_CN)); // 晓琳
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小蓉", "xiaorong", MscSpeaker.SEX_WOMAN, ACCENT_SICHUAN, MscSpeaker.LANGUAGE_ZH_CN)); // 小蓉
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小芸", "vixyun", MscSpeaker.SEX_WOMAN, ACCENT_DONGBEI, MscSpeaker.LANGUAGE_ZH_CN)); // 小芸
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小倩", "xiaoqian", MscSpeaker.SEX_WOMAN, ACCENT_DONGBEI, MscSpeaker.LANGUAGE_ZH_CN)); // 小倩
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小坤", "xiaokun", MscSpeaker.SEX_MAN, ACCENT_HENAN, MscSpeaker.LANGUAGE_ZH_CN)); // 小坤
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小强", "xiaoqiang", MscSpeaker.SEX_MAN, ACCENT_HUNAN, MscSpeaker.LANGUAGE_ZH_CN)); // 小强
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小莹", "vixying", MscSpeaker.SEX_WOMAN, ACCENT_SHANXI, MscSpeaker.LANGUAGE_ZH_CN)); // 小莹
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("小新", "xiaoxin", MscSpeaker.SEX_MAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN)); // 小新
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("楠楠", "nannan", MscSpeaker.SEX_WOMAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN)); // 楠楠
+        DEFAULT_MSC_SPEAKERS.add(new MscSpeaker("老孙", "vils", MscSpeaker.SEX_MAN, ACCENT_ZH_CH, MscSpeaker.LANGUAGE_ZH_CN)); // 老孙
     }
 
     // ---
@@ -103,7 +104,7 @@ public final class IFlyTekMscHelper {
                         JSONArray tts = !result.isNull("tts") ? result.getJSONArray("tts") : null;
                         if (tts != null && tts.length() > 0) {
                             final int len = tts.length();
-                            for (int i = 0; i < len; i ++) {
+                            for (int i = 0; i < len; i++) {
                                 JSONObject info = tts.getJSONObject(i);
                                 String name = !info.isNull("nickname") ? info.getString("nickname") : null;
                                 String alias = !info.isNull("name") ? info.getString("name") : null;

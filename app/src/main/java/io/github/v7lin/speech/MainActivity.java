@@ -13,7 +13,7 @@ import speech.msc.android.iflytek.IFlyTekMscPlayer;
 
 public class MainActivity extends Activity {
 
-    private MscPlayer mscPlayer;
+    MscPlayer mscPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

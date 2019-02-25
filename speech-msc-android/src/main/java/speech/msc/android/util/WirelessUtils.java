@@ -1,6 +1,5 @@
 package speech.msc.android.util;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -10,7 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import androidx.annotation.IntDef;
-import androidx.annotation.StringDef;
 
 /**
  * 所需权限
@@ -55,18 +53,8 @@ public final class WirelessUtils {
 
     public static void showSystemSettingUI(Context context) {
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
-                context.startActivity(intent);
-            } else {
-                Intent intent = new Intent();
-                ComponentName component = new ComponentName(
-                        "com.android.settings",
-                        "com.android.settings.WirelessSettings");
-                intent.setComponent(component);
-                intent.setAction(Intent.ACTION_VIEW);
-                context.startActivity(intent);
-            }
+            Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+            context.startActivity(intent);
         } catch (Exception ignored) {
             Intent intent = new Intent(Settings.ACTION_SETTINGS);
             context.startActivity(intent);
