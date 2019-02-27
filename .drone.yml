@@ -35,6 +35,8 @@ steps:
   commands:
   - ./gradlew :speech-msc-android:clean :speech-msc-android:install :speech-msc-android:artifactoryPublish
   when:
+    branch:
+    - master
     event:
     - push
 
